@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Kurbi Admin</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="node_modules/ng-admin/build/ng-admin.min.css"/>
+    <link rel="stylesheet" href="main.css"/>
+</head>
+<body ng-app="myApp">
+    <div ui-view></div>
+    <script src="node_modules/ng-admin/build/ng-admin.min.js"></script>
+    <script type="text/javascript">
+        var username = window.localStorage.getItem('posters_galore_login');
+        if (!username) {
+            //window.location.href = "./login.html";
+        }
+
+        function logout() {
+            window.localStorage.removeItem('posters_galore_login');
+            window.location.href = "./login.html";
+        }
+    </script>
+    <script src="bower_modules/videogular/videogular.js"></script>
+    <script src="bower_modules/videogular-controls/vg-controls.js"></script>
+    <script src="bower_modules/bower-videogular-youtube/youtube.js"></script>
+    <script type="text/javascript" src="build/bundle.js" charset="utf-8"></script>
+</body>
+</html>
