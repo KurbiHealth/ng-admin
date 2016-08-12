@@ -178,30 +178,40 @@ myApp.config(['NgAdminConfigurationProvider', function(nga) {
     // ==================================================
 
     // users (https://bkschool.stamplayapp.com/api/user/v1/)
-    var create = require('./models/users');
+    var createUser = require('./models/users');
     var userEntity = nga.entity('users').baseApiUrl('https://kurbi.stamplayapp.com/api/user/v1/');
-    admin.addEntity(create(nga,userEntity));
 
     // customization (of chatbox)
-    var create = require('./models/customization');
-    admin.addEntity(create(nga,nga.entity('customization')));
+    var createCustomization = require('./models/customization');
+    var customization = nga.entity('customization');
 
     // chatbox
-    var create = require('./models/chatbox');
-    admin.addEntity(create(nga,nga.entity('chatbox')));
+    var createChatbox = require('./models/chatbox');
+    var chatbox = nga.entity('chatbox');
 
     // chatroom
-    var create = require('./models/chatroom');
-    admin.addEntity(create(nga,nga.entity('chatroom')));
-
+    var createChatroom = require('./models/chatroom');
+    var chatroom = nga.entity('chatroom');
+    
     // articles
-    var create = require('./models/articles');
-    admin.addEntity(create(nga,nga.entity('articles')));
-
+    var createArticles = require('./models/articles');
+    var articles = nga.entity('articles');
+    
     // google api list
-    var create = require('./models/gglapis');
+    var createGglapis = require('./models/gglapis');
     var gglApis = nga.entity('apis').baseApiUrl('https://www.googleapis.com/discovery/v1/');
-    admin.addEntity(create(nga,gglApis));
+    
+    // contacts
+    var createContacts = require('./models/contacts');
+    var contacts = nga.entity('contacts');
+
+    admin.addEntity(createUser(nga,userEntity));
+    admin.addEntity(createCustomization(nga,customization));
+    admin.addEntity(createChatbox(nga,chatbox));
+    admin.addEntity(createChatroom(nga,chatroom));
+    admin.addEntity(createArticles(nga,articles));
+    admin.addEntity(createGglapis(nga,gglApis));
+    admin.addEntity(createContacts(nga,contacts));
 
 
 /***************************************
@@ -259,6 +269,7 @@ myApp.directive('stamplayArrStrings', stamplayArrayOfStringsDirective);
     admin.menu(nga.menu()
         .addChild(nga.menu().title('Dashboard').icon('<span class="glyphicon glyphicon-calendar"></span>&nbsp;').link('/dashboard'))
         .addChild(nga.menu(nga.entity('users')).title('Users').icon('<span class="glyphicon glyphicon-user"></span>&nbsp;'))
+        .addChild(nga.menu(nga.entity('contacts')).title('Contact Form').icon('<span class="glyphicon glyphicon-user"></span>&nbsp;'))
         .addChild(nga.menu().title('Chat').icon('<span class="glyphicon glyphicon-education"></span>&nbsp;')
             .addChild(nga.menu(nga.entity('chatroom')).title('Conversations').icon('<img src="/img/conversation_icon.png" width="14" height="14" />&nbsp;'))
             .addChild(nga.menu(nga.entity('customization')).title('ChatBox History').icon('<span class="glyphicon glyphicon-lamp"></span>&nbsp;'))
